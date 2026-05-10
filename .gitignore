@@ -1,0 +1,18 @@
+# dbt
+dbt/spotify_transform/target/
+dbt/spotify_transform/logs/
+dbt/logs/
+dbt/spotify_transform/.user.yml
+
+# Airflow logs
+logs/
+
+# Python cache
+dags/__pycache__/
+*.pyc
+
+# Data
+data/
+
+# Environment
+.env

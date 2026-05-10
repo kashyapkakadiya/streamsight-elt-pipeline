@@ -1,0 +1,60 @@
+version: 2
+
+sources:
+  - name: public
+    tables:
+      - name: spotify_songs
+        description: "Raw Spotify songs data loaded by Airflow ETL pipeline"
+
+models:
+  - name: stg_spotify_songs
+    description: "Cleaned and renamed staging layer over raw spotify_songs table"
+    columns:
+      - name: track_name
+        description: "Name of the track"
+        tests:
+          - not_null
+      - name: artist_name
+        description: "Name of the artist"
+        tests:
+          - not_null
+      - name: spotify_streams
+        description: "Total Spotify streams"
+        tests:
+          - not_null
+      - name: release_year
+        description: "Year the track was released"
+
+  - name: mart_top_artists
+    description: "Artist-level aggregations including cross-platform reach and rankings"
+    columns:
+      - name: artist_name
+        description: "Name of the artist"
+        tests:
+          - not_null
+          - unique
+      - name: spotify_rank
+        description: "Artist rank by total Spotify streams"
+        tests:
+          - not_null
+      - name: total_tracks
+        description: "Total number of tracks by this artist in the dataset"
+        tests:
+          - not_null
+
+  - name: mart_yearly_trends
+    description: "Year-level aggregations with YoY stream growth calculations"
+    columns:
+      - name: release_year
+        description: "The release year"
+        tests:
+          - not_null
+          - unique
+      - name: total_tracks_released
+        description: "Total tracks released that year"
+        tests:
+          - not_null
+      - name: streams_rank
+        description: "Year ranked by total Spotify streams"
+        tests:
+          - not_null

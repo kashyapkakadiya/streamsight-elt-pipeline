@@ -1,0 +1,5 @@
+pandas
+psycopg2-binary
+python-dotenv
+sqlalchemy
+apache-airflow==2.9.1

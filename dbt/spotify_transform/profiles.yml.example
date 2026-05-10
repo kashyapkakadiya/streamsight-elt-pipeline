@@ -1,0 +1,12 @@
+spotify_transform:
+  target: dev
+  outputs:
+    dev:
+      type: postgres
+      host: 127.0.0.1
+      port: 5432        # change to 5433 if port 5432 is occupied locally
+      user: your_username
+      password: your_password
+      dbname: airflow
+      schema: public
+      threads: 1
